@@ -37,28 +37,54 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     if (moviesSliderShow.isEmpty) {
       return Center(child: CircularProgressIndicator());
     }
-    return Column(
-      children: [
-        CustomeAppbar(),
-        MoviesSliderShow(movies: moviesSliderShow),
-        MovieHorizontalListview(
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subTitle: 'Lunes 20',
+    return CustomScrollView(slivers: [
+      const SliverAppBar(
+        floating: true,
+        flexibleSpace: FlexibleSpaceBar(
+          title: CustomeAppbar(),
         ),
-        /* Expanded(
-          child: ListView.builder(
-            itemCount: nowPlayingMovies.length,
-            itemBuilder: (context, index) {
-              final movie = nowPlayingMovies[index];
-              return ListTile(
-                title: Text(movie.title),
-                //subtitle: Text(movie.overview),
-              );
-            },
-          ),
-        ), */
-      ],
-    );
+      ),
+      SliverList(
+          delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Column(
+            children: [
+              //CustomeAppbar(),
+              MoviesSliderShow(movies: moviesSliderShow),
+              MovieHorizontalListview(
+                movies: nowPlayingMovies,
+                title: 'En cines',
+                subTitle: 'Lunes 20',
+                loadNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+              ),
+              MovieHorizontalListview(
+                movies: nowPlayingMovies,
+                title: 'Proximamente',
+                subTitle: 'En este mes',
+                loadNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+              ),
+              MovieHorizontalListview(
+                movies: nowPlayingMovies,
+                title: 'Polulares',
+                //subTitle: 'En este mes',
+                loadNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+              ),
+              MovieHorizontalListview(
+                movies: nowPlayingMovies,
+                title: 'Mejor calificadas',
+                subTitle: 'De todos los tiempos',
+                loadNextPage: () =>
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+              ),
+              const SizedBox(height: 10),
+            ],
+          );
+        },
+        childCount: 1,
+      )),
+    ]);
   }
 }
