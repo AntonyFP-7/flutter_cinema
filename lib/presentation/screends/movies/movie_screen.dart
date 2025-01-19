@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/providers/provider.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,10 @@ class _CustomeSliverAppBar extends StatelessWidget {
               child: Image.network(
                 movie.posterPath,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) return const SizedBox();
+                  return FadeInRight(child: child);
+                },
               ),
             ),
             SizedBox.expand(
@@ -128,9 +133,11 @@ class _MovioDetails extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  movie.posterPath,
-                  width: size.width * 0.3,
+                child: FadeInRight(
+                  child: Image.network(
+                    movie.posterPath,
+                    width: size.width * 0.3,
+                  ),
                 ),
               ),
               SizedBox(width: 10),

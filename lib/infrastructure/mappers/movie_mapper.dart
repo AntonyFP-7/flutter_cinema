@@ -16,8 +16,9 @@ class MovieMapper {
         popularity: moviedb.popularity,
         posterPath: moviedb.posterPath != ''
             ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
-            : 'no-poster',
-        releaseDate: moviedb.releaseDate,
+            : 'https://www.netherkellet.lancs.sch.uk/wp-content/uploads/wp-camo/3f81991d312b839fc4daed685f8062a8',
+        releaseDate:
+            moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime.now(),
         title: moviedb.title,
         video: moviedb.video,
         voteAverage: moviedb.voteAverage,

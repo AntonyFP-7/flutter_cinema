@@ -1,10 +1,10 @@
 import 'package:intl/intl.dart';
 
 class HumanFormat {
-  static String number(double number) {
+  static String number(double number, [int decimals = 0]) {
     final fomatterNumber = NumberFormat.compactCurrency(
       locale: 'en',
-      decimalDigits: 0,
+      decimalDigits: decimals,
       symbol: '',
     ).format(number);
     return fomatterNumber;
