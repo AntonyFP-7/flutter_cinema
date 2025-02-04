@@ -48,12 +48,12 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
-class _CustomeSliverAppBar extends StatelessWidget {
+class _CustomeSliverAppBar extends ConsumerWidget {
   final Movie movie;
   const _CustomeSliverAppBar({required this.movie});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     return SliverAppBar(
       backgroundColor: Colors.black,
@@ -65,6 +65,7 @@ class _CustomeSliverAppBar extends StatelessWidget {
           icon: const Icon(Icons.favorite_border),
           onPressed: () {
             // Add to favorites
+            ref.watch(localStorageRepositoryProvider).toggleFavotite(movie);
           },
         ),
       ],
