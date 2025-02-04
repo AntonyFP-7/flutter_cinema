@@ -87,35 +87,22 @@ class _CustomeSliverAppBar extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: [
-                        0.7,
-                        1.0
-                      ],
-                      colors: [
-                        Colors.transparent,
-                        Colors.black87,
-                      ]),
-                ),
-              ),
+            _CustomGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: [0.0, 0.2],
+              colors: [Colors.black54, Colors.transparent],
             ),
-            SizedBox.expand(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.topLeft, stops: [
-                    0.0,
-                    0.4
-                  ], colors: [
-                    Colors.black87,
-                    Colors.transparent,
-                  ]),
-                ),
-              ),
+            _CustomGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.8, 1.0],
+              colors: [Colors.transparent, Colors.black87],
+            ),
+            _CustomGradient(
+              begin: Alignment.topLeft,
+              stops: [0.0, 0.4],
+              colors: [Colors.black54, Colors.transparent],
             ),
           ],
         ),
