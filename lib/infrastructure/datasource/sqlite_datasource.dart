@@ -31,11 +31,23 @@ class SqliteDatasource extends LocalStorageDatasource {
     await db.execute('''
         CREATE TABLE movies (
         id INTEGER PRIMARY KEY,
-        title TEXT NULL
+        backdropPath TEXT NULL,
+        posterPath TEXT NULL,
+        title TEXT NULL,
+        releaseDate TEXT NULL,
+        voteAverage REAL NULL,
+        originalLanguage TEXT NULL,
+        originalTitle TEXT NULL,
+        overview TEXT NULL,
+        popularity REAL NULL,
+        adult INTEGER NULL,
+        video INTEGER NULL,
+        voteCount INTEGER NULL,
         )
         ''');
   }
 
+//genreIds TEXT NULL,
   @override
   Future<bool> isMovieFavorite(int movieId) async {
     final db = await database;
