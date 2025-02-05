@@ -32,19 +32,6 @@ class Movie {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "backdropPath": backdropPath,
-        "posterPath": posterPath,
         "title": title,
-        "releaseDate":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
-        "voteAverage": voteAverage,
-        "genreIds": List<dynamic>.from(genreIds.map((x) => x)),
-        "originalLanguage": originalLanguage,
-        "originalTitle": originalTitle,
-        "overview": overview,
-        "popularity": popularity,
-        "adult": adult,
-        "video": video,
-        "voteCount": voteCount,
       };
 }

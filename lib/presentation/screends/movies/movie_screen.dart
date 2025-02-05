@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/domain/repositories/local_storage_repository.dart';
 import 'package:cinemapedia/presentation/providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,6 +49,11 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   }
 }
 
+final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) {
+  final localStorageRepository = ref.watch(localStorageRepositoryProvider);
+  return localStorageRepository.isMovieFavorite(movieId);
+});
+
 class _CustomeSliverAppBar extends ConsumerWidget {
   final Movie movie;
   const _CustomeSliverAppBar({required this.movie});
@@ -55,17 +61,24 @@ class _CustomeSliverAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final isFavoriteFuture = ref.watch(isFavoriteProvider(movie.id));
     return SliverAppBar(
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
       actions: [
         IconButton(
-          //icon: const Icon(Icons.favorite, color: Colors.red),
-          icon: const Icon(Icons.favorite_border),
+          icon: isFavoriteFuture.when(
+            data: (isFavorite) => isFavorite
+                ? Icon(Icons.favorite, color: Colors.red)
+                : Icon(Icons.favorite_border),
+            error: (_, __) => throw UnimplementedError(),
+            loading: () => CircularProgressIndicator(strokeWidth: 2),
+          ),
           onPressed: () {
             // Add to favorites
             ref.watch(localStorageRepositoryProvider).toggleFavotite(movie);
+            ref.invalidate(isFavoriteProvider(movie.id));
           },
         ),
       ],
