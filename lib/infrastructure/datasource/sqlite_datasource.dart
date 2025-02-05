@@ -57,26 +57,26 @@ class SqliteDatasource extends LocalStorageDatasource {
   }
 
   @override
-  Future<List<Movie>> loadMovie({int limit = 0, offset = 10}) async {
+  Future<List<Movie>> loadMovie({int limit = 10, offset = 0}) async {
     final db = await database;
     final List<Map<String, dynamic>> movies =
         await db.query('movies', limit: limit, offset: offset);
     return List.generate(movies.length, (i) {
       return Movie(
         id: movies[i]['id'],
-        backdropPath: movies[i]['backdropPath'],
-        posterPath: movies[i]['posterPath'],
+        backdropPath: movies[i]['backdropPath'] ?? '',
+        posterPath: movies[i]['posterPath'] ?? '',
         title: movies[i]['title'],
-        releaseDate: movies[i]['releaseDate'],
-        adult: movies[i]['adult'],
-        genreIds: movies[i]['genreIds'],
-        voteAverage: movies[i]['voteAverage'],
-        voteCount: movies[i]['voteCount'],
-        originalLanguage: movies[i]['originalLanguage'],
-        originalTitle: movies[i]['originalTitle'],
-        overview: movies[i]['overview'],
-        popularity: movies[i]['popularity'],
-        video: movies[i]['video'],
+        releaseDate: DateTime.now(),
+        adult: movies[i]['adult'] == 1 ? true : false,
+        genreIds: [],
+        voteAverage: movies[i]['voteAverage'] ?? 0.0,
+        voteCount: movies[i]['voteCount'] ?? 0,
+        originalLanguage: movies[i]['originalLanguage'] ?? 'es',
+        originalTitle: movies[i]['originalTitle'] ?? '',
+        overview: movies[i]['overview'] ?? '',
+        popularity: movies[i]['popularity'] ?? 0,
+        video: movies[i]['video'] == 1 ? true : false,
       );
     });
   }
