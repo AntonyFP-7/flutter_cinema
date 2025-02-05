@@ -2,33 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomeBottomNavigation extends StatelessWidget {
-  const CustomeBottomNavigation({super.key});
-
-  int getCurrentIndex(BuildContext context) {
-    final String location = GoRouterState.of(context).matchedLocation;
-    switch (location) {
-      case '/':
-        return 0;
-      case '/categories':
-        return 1;
-      case '/favorite':
-        return 1;
-      default:
-        return 0;
-    }
-  }
-
+  final int pageIndex;
+  const CustomeBottomNavigation({super.key, required this.pageIndex});
   void onItemTapped(BuildContext context, int index) {
     switch (index) {
       case 0:
-        context.go('/');
-        break;
+        context.go('/home/0');
       case 1:
-        context.go('/');
-        break;
+        context.go('/home/0');
       case 2:
-        context.go('/favorites');
-        break;
+        context.go('/home/2');
+      default:
+        context.go('/home/0');
     }
   }
 
@@ -36,7 +21,7 @@ class CustomeBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
         elevation: 0,
-        currentIndex: getCurrentIndex(context),
+        currentIndex: pageIndex,
         onTap: (value) => onItemTapped(context, value),
         items: [
           BottomNavigationBarItem(
