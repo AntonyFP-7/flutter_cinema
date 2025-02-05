@@ -1,19 +1,22 @@
+import 'package:cinemapedia/presentation/views/view.dart';
 import 'package:flutter/material.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
+
 class HomeScreend extends StatelessWidget {
   static const String name = "home-screend";
-  final Widget childVew;
-  const HomeScreend({super.key, required this.childVew});
+  final int pageIndex;
+  const HomeScreend({super.key, required this.pageIndex});
+  final viewRoutes = const <Widget>[HomeView(), SizedBox(), FavoritesView()];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: childVew,
+      body: IndexedStack(
+        index: pageIndex,
+        children: viewRoutes,
       ),
-      bottomNavigationBar: CustomeBottomNavigation(),
+      bottomNavigationBar: CustomeBottomNavigation(pageIndex: pageIndex),
     );
   }
 }
-
-
