@@ -42,7 +42,7 @@ class SqliteDatasource extends LocalStorageDatasource {
         popularity REAL NULL,
         adult INTEGER NULL,
         video INTEGER NULL,
-        voteCount INTEGER NULL,
+        voteCount INTEGER NULL
         )
         ''');
   }
@@ -67,7 +67,9 @@ class SqliteDatasource extends LocalStorageDatasource {
         backdropPath: movies[i]['backdropPath'] ?? '',
         posterPath: movies[i]['posterPath'] ?? '',
         title: movies[i]['title'],
-        releaseDate: DateTime.now(),
+        releaseDate: movies[i]['releaseDate'] == null
+            ? DateTime.now()
+            : DateTime.parse(movies[i]['releaseDate']),
         adult: movies[i]['adult'] == 1 ? true : false,
         genreIds: [],
         voteAverage: movies[i]['voteAverage'] ?? 0.0,
