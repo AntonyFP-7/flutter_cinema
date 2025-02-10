@@ -36,8 +36,10 @@ class Movie {
         "id": id,
         "backdropPath": backdropPath,
         "posterPath": posterPath,
-        "title": title,
-        "releaseDate":
+        "title": title
+      };
+       //"genreIds": List<dynamic>.from(genreIds.map((x) => x)),
+   /*             "releaseDate":
             "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
         "voteAverage": voteAverage,
         "originalLanguage": originalLanguage,
@@ -46,7 +48,5 @@ class Movie {
         "popularity": popularity,
         "adult": adult,
         "video": video,
-        "voteCount": voteCount
-      };
-       //"genreIds": List<dynamic>.from(genreIds.map((x) => x)),
+        "voteCount": voteCount */
 }
