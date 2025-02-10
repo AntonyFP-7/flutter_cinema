@@ -75,9 +75,10 @@ class _CustomeSliverAppBar extends ConsumerWidget {
             error: (_, __) => throw UnimplementedError(),
             loading: () => CircularProgressIndicator(strokeWidth: 2),
           ),
-          onPressed: () {
+          onPressed: () async{
             // Add to favorites
-            ref.watch(localStorageRepositoryProvider).toggleFavotite(movie);
+            //ref.reade(localStorageRepositoryProvider).toggleFavotite(movie);
+           await ref.read(favoriteMovieProvider.notifier).toggleFavorute(movie);
             ref.invalidate(isFavoriteProvider(movie.id));
           },
         ),
